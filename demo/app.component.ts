@@ -39,6 +39,10 @@ export class TimeFormatter implements NouiFormatter {
   template: require('./app.component.html')
 })
 export class AppComponent implements OnInit {
+
+  min: number = 0;
+  max: number = 100;
+  step: number = 1;
   public disabled: boolean = false;
   public keyupLabelOn: boolean = false;
   public keydownLabelOn: boolean = false;
@@ -182,6 +186,8 @@ export class AppComponent implements OnInit {
 
   onChange(value: any) {
     console.log('Value changed to', value);
+    this.min++;
+    this.max--;
   }
 
   blinkKeyupLabel() {

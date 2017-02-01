@@ -6,6 +6,7 @@ import {
   forwardRef,
   Input,
   OnInit,
+  OnChanges,
   Output,
   NgModule,
 } from '@angular/core';
@@ -52,7 +53,7 @@ export class DefaultFormatter implements NouiFormatter {
     }
   ]
 })
-export class NouisliderComponent implements ControlValueAccessor, OnInit {
+export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   public slider: any;
   public handles: any[];
@@ -82,6 +83,17 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   private onTouched: any = Function.prototype;
 
   constructor(private el: ElementRef) { }
+
+  ngOnChanges(changes: any): void {
+    if((changes.min !== undefined) && (changes.max !== undefined)) {
+     console.log(changes.min.currentValue, changes.max.currentValue);
+     this.min = changes.min.currentValue;
+     this.max = changes.max.currentValue;
+    }
+    // if(changes !== undefined) {
+    // this.max = changes.max.currentValue;
+    // this.min = changes.min.currentValue;}
+  }
 
   ngOnInit(): void {
     let inputsConfig = JSON.parse(JSON.stringify({
